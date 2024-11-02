@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cooperativa.app</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header, nav {
+            background-color: #ff0000;
+            color: white;
+        }
+        .nav-link {
+            color: white;
+        }
+        .nav-link.active {
+            background-color: #cc0000;
+        }
+        h1, h2 {
+            color: #ff0000;
+        }
+        .btn-danger {
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+        .btn-danger:hover {
+            background-color: #cc0000;
+            border-color: #cc0000;
+        }
+        .servico-card {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            width: 100%;
+        }
+        .servico-titulo {
+            font-weight: bold;
+            color: #ff0000;
+        }
+        .modal-content {
+            margin-top: 100px;
+            
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .close {
+            color: #ff0000;
+            font-size: 30px;
+            font-weight: bold;
+            float: right;
+        }
+        #whatsappButton {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #servicos {
+            display: none;
+        }
+
+        /* Adicione este estilo ao seu arquivo CSS ou dentro da tag <style> no seu HTML */
+
+        /* Inicialmente esconde a seção de serviços */
+        #servicos {
+            display: none;
+        }
+
+        /* Classe para exibir a seção de serviços quando ativada */
+        #servicos.show {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="d-flex justify-content-between align-items-center p-3">
+        <div class="d-flex align-items-center">
+            <img src="img/WhatsApp Image 2024-11-01 at 17.53.51.jpeg" alt="Logo" class="rounded-circle" style="height: 70px;">
+            <h1 class="ml-3 h4 mb-0" style="color: #333;">Busque serviços aqui</h1>
+        </div>
+    </header>
+
+    <nav class="nav nav-pills justify-content-center py-3">
+        <a class="nav-link active" href="afiliado.html">Seja um afiliado</a>
+        <a class="nav-link" href="https://chat.whatsapp.com/LX9e9rLyhCy3UCWgR42uoh">Entre na comunidade</a>
+        <a class="nav-link" href="cliente.html">Perfil cliente</a>
+    </nav>
+
+    <main class="container mt-3">
+        <div style="text-align: center;"> 
+            <button class="btn btn-danger" onclick="toggleServicos()">Serviços Rápidos</button> 
+            <div id="servicos"> 
+                <h2>Opções de Serviços</h2> 
+                <div style="display: flex; justify-content: center;"> 
+                    <div>
+                        <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de conserto de computador" class="btn btn-danger" style="display: flex; flex-direction: column; align-items: center; margin: 10px;"> 
+                         Conserto de Computador </a> 
+                        <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de formatação de computador" class="btn btn-danger" style="display: flex; flex-direction: column; align-items: center; margin: 10px;"> 
+                            Formatação de Computador </a>
+                    </div> 
+                   <div>
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de limpeza de computador" class="btn btn-danger" style="display: flex; flex-direction: column; align-items: center; margin: 10px;"> 
+                        Limpeza de Computador </a> 
+                    <a href="https://api.whatsapp.com/send?phone=558288873225&text=Olá, estou interessado no serviço de criação de sites" class="btn btn-danger" style="display: flex; flex-direction: column; align-items: center; margin: 10px;"> 
+                        Criação de Sites e sistemas </a>
+                   </div> 
+                </div> 
+            </div> 
+        </div>
+        
+            <div class="d-flex mt-3" style="width: 100%;">
+                <input type="text" class="form-control" placeholder="Pesquisar serviços" id="procurar">
+                <button class="btn btn-danger ml-2" onclick="procurarVaga()">Pesquisar</button>
+            </div>
+            <div class="container_vagas mt-4" id="vagas" style="display: flex; flex-direction: column; align-items: center; justify-items: center; overflow-y: auto; max-height: 400px;">
+                <!-- Serviços serão adicionados aqui -->
+            </div>
+            
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div id="modalContent">
+                        <!-- Conteúdo do modal será adicionado aqui -->
+                    </div>
+                    <button id="whatsappButton">Chamar no WhatsApp</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div style="display: flex; flex-direction: column;">
+            <div style="display: flex;">
+                <a href="">conheça nosso instagram</a>
+                <a href="">conheça nosso canal no youtube</a>
+                <a href="">conheça nosso site</a>
+            </div>
+            <div style="display: flex;">
+                <a href="">....</a>
+                <a href="">....</a>
+                <a href="">....</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleServicos() {
+            var servicos = document.getElementById('servicos');
+            if (servicos.style.display === 'none' || servicos.style.display === '') {
+                servicos.style.display = 'block';
+            } else {
+                servicos.style.display = 'none';
+            }
+        }
+
+        function mostrarServicos() {
+            const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+            const vagaContainer = document.getElementById('vagas');
+            vagaContainer.innerHTML = '';
+
+            if (servicos.length > 0) {
+                servicos.forEach((servico, index) => {
+                    vagaContainer.innerHTML += `
+                        <div class="servico-card" onclick="mostrarDetalhes(${index})">
+                            <p class="servico-titulo">Serviço: ${servico.servico}</p>
+                            <p><strong>Nome:</strong> ${servico.nome}</p>
+                            <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                            <p><strong>Email:</strong> ${servico.email}</p>
+                            <p><strong>Valor:</strong> ${servico.valor}</p>
+                            <p><strong>Descrição:</strong> ${servico.descricao}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                vagaContainer.innerHTML = '<p class="nenhum-servico">Nenhum serviço cadastrado.</p>';
+            }
+        }
+
+        function procurarVaga() {
+            const procurarInput = document.getElementById('procurar').value.toLowerCase();
+            const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+            const vagaContainer = document.getElementById('vagas');
+            const servicosFiltrados = servicos.filter(servico => 
+                servico.servico.toLowerCase().includes(procurarInput)
+            );
+
+            vagaContainer.innerHTML = '';
+
+            if (servicosFiltrados.length > 0) {
+                servicosFiltrados.forEach((servico, index) => {
+                    vagaContainer.innerHTML += `
+                        <div class="servico-card" onclick="mostrarDetalhes(${index})">
+                            <p class="servico-titulo">Serviço: ${servico.servico}</p>
+                            <p><strong>Nome:</strong> ${servico.nome}</p>
+                            <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                            <p><strong>Email:</strong> ${servico.email}</p>
+                            <p><strong>Valor:</strong> ${servico.valor}</p>
+                            <p><strong>Descrição:</strong> ${servico.descricao}</p>
+                        </div>
+                    `;
+                });
+            } else {
+                vagaContainer.innerHTML = '<p>Serviço não encontrado, tente outro serviço ou nome.</p>';
+            }
+        }
+
+        function mostrarDetalhes(index) {
+            const servicos = JSON.parse(localStorage.getItem('servicos')) || [];
+            const servico = servicos[index];
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <p class="servico-titulo">Serviço: ${servico.servico}</p>
+                <p><strong>Nome:</strong> ${servico.nome}</p>
+                <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                <p><strong>Email:</strong> ${servico.email}</p>
+                <p><strong>Valor:</strong> ${servico.valor}</p>
+                <p><strong>Descrição:</strong> ${servico.descricao}</p>
+            `;
+
+            // Adiciona o evento de clique para o botão do WhatsApp
+            document.getElementById('whatsappButton').onclick = function() {
+                enviarWhatsapp(servico);
+            };
+
+            // Exibe o modal
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function enviarWhatsapp(servico) {
+            const url = `https://api.whatsapp.com/send?phone=${servico.telefone}&text=Olá, estou interessado no serviço de ${servico.servico}`;
+            sessionStorage.setItem('servicoSelecionado', JSON.stringify(servico));
+            window.location.href = url;
+        }
+
+        function adicionarDemonstracao() {
+            const vagaContainer = document.getElementById('vagas');
+            
+            const modelos = [
+                {
+                    servico: "designer",
+                    nome: "dhandara omena",
+                    telefone: "82987342053",
+                    email: "dhataomena@gmail.com",
+                    valor: "10,00",
+                    descricao: "se você gostou, tente divulgar seu serviço indo no botão de afiliados e adicione seu modelo e espere os clientes lhe chamarem"
+                },
+            ];
+
+            modelos.forEach((servico) => {
+                vagaContainer.innerHTML += `
+                    <div class="servico-card">
+                        <p class="servico-titulo">Serviço: serviço de demonstração, não funciona de fato</p>
+                        <p><strong>Nome:</strong> ${servico.nome}</p>
+                        <p><strong>Telefone:</strong> ${servico.telefone}</p>
+                        <p><strong>Email:</strong> ${servico.email}</p>
+                        <p><strong>Valor:</strong> ${servico.valor}</p>
+                        <p><strong>Descrição:</strong> ${servico.descricao}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleServicos() { var servicos = document.getElementById('servicos'); servicos.classList.toggle('show'); }
+
+        window.onload = function() {
+            mostrarServicos();
+            adicionarDemonstracao(); // Adiciona as divs de demonstração ao carregar a página
+        };
+    </script>
+</body>
+</html>
